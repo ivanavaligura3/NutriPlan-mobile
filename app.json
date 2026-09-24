@@ -1,5 +1,8 @@
 {
   "expo": {
+    "android": {
+      "sofwareKeyboardLayoutMode": "resize"
+    },
     "name": "NutriPlan-mobile",
     "slug": "NutriPlan-mobile",
     "version": "1.0.0",

@@ -1,18 +1,28 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+import { Stack } from 'expo-router';
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
+import { MealProvider } from '../context/MealContext';
+import { RecipeProvider } from '../context/RecipeContext';
+import { FoodProvider } from '../context/FoodContext';
+import { ShoppingProvider } from '../context/ShoppingContext';
 
-SplashScreen.preventAutoHideAsync();
+// Glavni layout aplikacije.
+// Provider komponente omogućavaju svim ekranima aplikacije
+// pristup zajedničkim podacima o obrocima i receptima.
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
-  );
+export default function RootLayout() {
+    return (
+        <MealProvider>
+            <RecipeProvider>
+                <FoodProvider>
+                    <ShoppingProvider>
+                        <Stack
+                            screenOptions={{
+                                headerShown: false,
+                            }}
+                        />
+                    </ShoppingProvider>
+                </FoodProvider>
+            </RecipeProvider>
+        </MealProvider>
+    );
 }
