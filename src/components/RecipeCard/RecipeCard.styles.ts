@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 import { COLORS } from '../../styles/colors';
 import { SPACING } from '../../styles/spacing';
 import { TYPOGRAPHY } from '../../styles/typography';
-import { setParams } from 'expo-router/build/global-state/router';
 
 export const styles = StyleSheet.create({
     container: {
@@ -40,4 +39,31 @@ export const styles = StyleSheet.create({
         fontWeight: '600',
         color: COLORS.primary,
     },
+
+    actions: {
+        marginTop: SPACING.md,
+        alignItems: 'flex-end',
+    },
+
+    deleteText: {
+        fontSize: TYPOGRAPHY.bodySmall,
+        fontWeight: '600',
+        color: COLORS.error,
+    },
+
+    header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+},
+
+recipeInfo: {
+    flex: 1,
+},
+
+favoriteButton: {
+    marginLeft: SPACING.md,
+    padding: SPACING.xs,
+},
+
 });

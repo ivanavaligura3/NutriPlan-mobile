@@ -10,6 +10,8 @@ import { COLORS } from '../../styles/colors';
 import { SPACING } from '../../styles/spacing';
 import { TYPOGRAPHY } from '../../styles/typography';
 
+import { registerUser } from '../../services/api';
+
 import {
     getPasswordStrength,
     isValidEmail,
@@ -23,6 +25,7 @@ import {
 export default function RegisterScreen() {
     // Vrednosti koje korisnik unosi u formu.
     const [name, setName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -36,11 +39,12 @@ export default function RegisterScreen() {
     // Proverava podatke forme pre pokušaja registracije.
     // Za sada uspešna validacija vodi na Home ekran.
     // Kasnije će ovde biti poziv backend API-ja.
-    const handleRegister = () => {
+    const handleRegister = async () => {
         setError('');
 
         if (
             !name.trim() ||
+            !lastName.trim() ||
             !email.trim() ||
             !password ||
             !confirmPassword
@@ -66,8 +70,26 @@ export default function RegisterScreen() {
             return;
         }
 
-        // Privremeno ponašanje dok ne povežemo backend.
-        router.replace('/(tabs)/home');
+        try {
+            // Slanje podataka za registraciju backend-u.
+            await registerUser(
+                name.trim(),
+                lastName.trim(),
+                email.trim(),
+                password
+            );
+
+            // Nakon uspešne registracije vraćamo korisnika na Login.
+            router.replace('/(auth)/login');
+
+        } catch (error) {
+            // Prikazujemo poruku koju je vratio backend.
+            if (error instanceof Error) {
+                setError(error.message);
+            } else {
+                setError('Registracija nije uspela.');
+            }
+        }
     };
 
     // Vraća korisnika na Login ekran ukoliko već ima nalog.
@@ -92,6 +114,14 @@ return (
                 placeholderTextColor={COLORS.textSecondary}
                 value={name}
                 onChangeText={setName}
+            />
+
+            {/* Polje za prezime */}
+            <Input
+                placeholder="Prezime"
+                placeholderTextColor={COLORS.textSecondary}
+                value={lastName}
+                onChangeText={setLastName}
             />
 
             {/* Polje za email */}

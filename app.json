@@ -1,9 +1,16 @@
 {
   "expo": {
     "android": {
-      "sofwareKeyboardLayoutMode": "resize"
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "backgroundImage": "./assets/images/android-icon-background.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "com.valigura.svoja"
     },
-    "name": "NutriPlan-mobile",
+    "name": "Svoja",
     "slug": "NutriPlan-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -12,15 +19,6 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon"
-    },
-    "android": {
-      "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
-      },
-      "predictiveBackGestureEnabled": false
     },
     "web": {
       "output": "static",
@@ -35,11 +33,19 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }
-      ]
+      ],
+      "expo-secure-store",
+      "@react-native-community/datetimepicker"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "104cc280-8861-4da4-98fd-b8da33d9f45d"
+      }
     }
   }
 }

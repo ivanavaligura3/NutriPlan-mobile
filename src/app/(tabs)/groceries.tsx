@@ -1,4 +1,14 @@
-import { Pressable, ScrollView, StyleSheet, Text, View, Alert } from 'react-native';
+import { useState } from 'react';
+
+import {
+    Pressable,
+    ScrollView,
+    StyleSheet,
+    Text,
+    View,
+    Alert,
+    TextInput,
+} from 'react-native';
 
 import { useFoods } from '../../context/FoodContext';
 import FoodCard from '../../components/FoodCard/FoodCard';
@@ -11,6 +21,15 @@ import { router } from 'expo-router';
 
 export default function GroceriesScreen() {
     const { foods, removeFood } = useFoods();
+
+    const [search, setSearch] = useState('');
+
+    const filteredFoods = foods.filter((food) =>
+        food.name
+            .toLowerCase()
+            .includes(search.toLowerCase())
+    );
+
     const handleDeleteFood = (foodId: number) => {
         Alert.alert(
             'Obriši namirnicu',
@@ -43,6 +62,14 @@ export default function GroceriesScreen() {
                 Pregled namirnica koje trenutno imate.
             </Text>
 
+            <TextInput
+                style={styles.searchInput}
+                value={search}
+                onChangeText={setSearch}
+                placeholder="Pretraži namirnice..."
+                placeholderTextColor={COLORS.textSecondary}
+            />
+
             <Pressable 
                 style={styles.addButton}
                 onPress={() => router.push('/add-food')}
@@ -53,21 +80,27 @@ export default function GroceriesScreen() {
             </Pressable>
 
             <View style={styles.listContainer}>
-                {foods.map((food) => (
-                    <FoodCard
-                        key={food.id}
-                        food={food}
-                        onPress={() =>
-                            router.push({
-                                pathname: '/add-food',
-                                params: {
-                                    foodId: food.id.toString(),
-                                },
-                            })
-                        }
-                        onDelete={() => handleDeleteFood(food.id)}
-                    />
-                ))}
+                {filteredFoods.length === 0 ? (
+                    <Text style={styles.emptyText}>
+                        Nema pronađenih namirnica.
+                    </Text>
+                ) : (
+                    filteredFoods.map((food) => (
+                        <FoodCard
+                            key={food.id}
+                            food={food}
+                            onPress={() =>
+                                router.push({
+                                    pathname: '/add-food',
+                                    params: {
+                                        foodId: food.id.toString(),
+                                    },
+                                })
+                            }
+                            onDelete={() => handleDeleteFood(food.id)}
+                        />
+                    ))
+                )}
             </View>
         </ScrollView>
     );
@@ -96,6 +129,26 @@ const styles = StyleSheet.create({
         color: COLORS.textSecondary, 
         marginBottom: SPACING.xl, 
     }, 
+
+    searchInput: {
+        width: '100%',
+        borderWidth: 1,
+        borderColor: COLORS.border,
+        borderRadius: 10,
+        paddingHorizontal: SPACING.md,
+        paddingVertical: SPACING.md,
+        fontSize: TYPOGRAPHY.body,
+        color: COLORS.text,
+        backgroundColor: COLORS.background,
+        marginBottom: SPACING.lg,
+    },
+
+    emptyText: {
+        fontSize: TYPOGRAPHY.body,
+        color: COLORS.textSecondary,
+        textAlign: 'center',
+        marginTop: SPACING.md,
+    },
     
     listContainer: { 
         gap: SPACING.md, 

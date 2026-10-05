@@ -4,4 +4,5 @@ export type ShoppingItem = {
     quantity: number;
     unit: string;
     isPurchased: boolean;
+    isAutomatic?: boolean;
 };

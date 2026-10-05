@@ -39,4 +39,10 @@ export const styles = StyleSheet.create({
         fontWeight: '600',
         color: COLORS.white,
     },
+
+    nutrition: {
+        fontSize: TYPOGRAPHY.bodySmall,
+        color: COLORS.textSecondary,
+        marginTop: SPACING.xs,
+    },
 });

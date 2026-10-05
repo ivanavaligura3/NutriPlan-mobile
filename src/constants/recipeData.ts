@@ -6,6 +6,9 @@ export const RECIPES: Recipe[] = [
         name: 'Piletina sa povrćem',
         description: 'Piletina sa sezonskim povrćem i pirinčem.',
         calories: 520,
+        protein: 43,
+        carbohydrates: 48,
+        fat: 16,
         preparationTime: 30,
         ingredients: [
             {
@@ -48,6 +51,9 @@ export const RECIPES: Recipe[] = [
         name: 'Ovsena kaša sa bananom',
         description: 'Jednostavan doručak sa ovsenim pahuljicama i bananom.',
         calories: 420,
+        protein: 14,
+        carbohydrates: 68,
+        fat: 11,
         preparationTime: 10,
         ingredients: [
             {
@@ -83,6 +89,9 @@ export const RECIPES: Recipe[] = [
         name: 'Omlet sa povrćem',
         description: 'Omlet sa jajima, paprikom, paradajzom i sirom.',
         calories: 350,
+        protein: 24,
+        carbohydrates: 12,
+        fat: 22,
         preparationTime: 15,
         ingredients: [
             {
@@ -125,6 +134,9 @@ export const RECIPES: Recipe[] = [
         name: 'Salata sa tunjevinom',
         description: 'Lagani obrok sa tunjevinom, povrćem i kukuruzom.',
         calories: 360,
+        protein: 34,
+        carbohydrates: 24,
+        fat: 15,
         preparationTime: 15,
         ingredients: [
             {
